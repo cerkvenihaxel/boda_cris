@@ -26,6 +26,7 @@ $imagePath = public_path('leaves.png');
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
+            z-index: 100;
         }
         nav a {
             color: #4f4f4f;
@@ -180,12 +181,14 @@ $imagePath = public_path('leaves.png');
             opacity: 0;
             transform: translateY(30px); /* Comienza desde abajo */
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            z-index: -30;
         }
 
         /* Cuando se hace visible */
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0); /* Se posiciona en su lugar original */
+            z-index: -30;
         }
 
         .playlist h2 {

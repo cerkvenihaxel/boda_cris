@@ -183,7 +183,9 @@
                 if (response.ok) {
                     alert("¡Canción agregada a la playlist!");
                 } else {
-                    alert("Error al agregar la canción.");
+                    alert("Error al agregar la canción. Vamos a actualizar el código de envío por favor intenta de nuevo");
+                     // Agregar dispatch del código
+
                 }
             })
             .catch(error => console.error("Error:", error));

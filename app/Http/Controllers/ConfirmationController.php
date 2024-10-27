@@ -25,7 +25,7 @@ class ConfirmationController extends Controller
             'message' => $request->get('message')
         ]);
 
-        Mail::to('mariacristinasub@gmail.com')->send(new ConfirmationMail($invitation->toArray()));
+        Mail::to(['mariacristinasub@gmail.com', $request->assistant_email])->send(new ConfirmationMail($invitation->toArray()));
 
         return redirect()->back()->with('success', '¡Gracias por confirmar tu asistencia!');
     }

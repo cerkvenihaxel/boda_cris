@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Facades\SpotifyFacade;
+use App\Jobs\UpdateTokenCode;
+use App\Models\TokenCode;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Aerni\Spotify\Spotify;
@@ -30,7 +32,9 @@ class SpotifyController extends Controller
         $songUri = $request->input('songUri');
         $playlistId = '1DYcny3fMa89bOX30KnV90'; // ID de tu lista de reproducción
 
-        $accessToken = env('SPOTIFY_ACCESS_TOKEN');
+        $tokenCode = TokenCode::where('expiration_date', '<', date('Y-m-d H:i:s'))->first()->value('access_token');
+
+        $accessToken = $tokenCode;
 
         $client = new Client();
 
