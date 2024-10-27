@@ -95,10 +95,27 @@ $imagePath = public_path('leaves.png');
 
         .countdown h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             margin-bottom: 10px;
             color: #dd8373;
+            padding: 1rem;
         }
+
+        .principal-text{
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 50px 0;
+            color: #4f4f4f;
+        }
+
+        .principal-text-header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #4e6e33;
+            padding: 1rem;
+        }
+
 
         .countdown p {
             font-size: 1.2rem;
@@ -157,6 +174,18 @@ $imagePath = public_path('leaves.png');
             width: 100px;
             height: 100px;
             border-radius: 50%;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px); /* Comienza desde abajo */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Cuando se hace visible */
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0); /* Se posiciona en su lugar original */
         }
 
         .playlist h2 {
@@ -344,9 +373,19 @@ $imagePath = public_path('leaves.png');
 
 <x-separator />
 
+<section class="principal-text">
+    <div class="principal-text-header">
+        <h1>Las pequeñas reuniones se convierten en grandes fiestas cuando estamos rodeados de las personas que más queremos.
+            Te invitamos a nuestro Casamiento para que esta fiesta sea inolvidable.</h1>
+    </div>
+</section>
+
+<x-separator />
+
 <!-- Sección de cuenta regresiva -->
 <section class="countdown">
-    <h2>Te invitamos a festejar nuestro amor</h2>
+    <h2>El día mas esperado de nuestras vidas finalmente ha llegado.
+        Acompáñennos y sean parte de nuestra historia de amor</h2>
     <p>16 de noviembre del 2024</p>
     <div class="countdown-container">
         <div class="countdown-item">
@@ -386,7 +425,7 @@ $imagePath = public_path('leaves.png');
 
         </div>
         <h3>Ceremonia</h3>
-        <p>16 de Noviembre, 18:00</p>
+        <p>16 de Noviembre, 18:30</p>
         <p>Iglesia La Merced</p>
         <p>Calle 9 de Julio y Av. Rivadavia, La Rioja, Argentina</p>
         <a href="https://maps.app.goo.gl/tGSMieqhr4HsNc9RA" target="_blank" class="map-button">Ver Mapa</a>
@@ -413,7 +452,7 @@ $imagePath = public_path('leaves.png');
 
 <section class="timeline">
     <div class="timeline-item">
-        <span class="time">18:00</span>
+        <span class="time">18:30</span>
         <h4>Ceremonia</h4>
         <p>Iglesia La Merced</p>
     </div>
@@ -471,6 +510,25 @@ $imagePath = public_path('leaves.png');
     }
 
     setInterval(updateCountdown, 1000);
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const fadeElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p"); // Selecciona todos los encabezados
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, {
+            threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+        });
+
+        fadeElements.forEach(el => {
+            el.classList.add("fade-in"); // Añade la clase inicial a cada encabezado
+            observer.observe(el); // Observa cada encabezado
+        });
+    });
 </script>
 
 </body>
