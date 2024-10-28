@@ -32,7 +32,8 @@ class SpotifyController extends Controller
         $songUri = $request->input('songUri');
         $playlistId = '1DYcny3fMa89bOX30KnV90'; // ID de tu lista de reproducción
 
-        $tokenCode = TokenCode::where('expiration_date', '<', date('Y-m-d H:i:s'))->first()->value('access_token');
+        $tokenCode = TokenCode::latest('created_at')
+            ->value('access_token');
 
         $accessToken = $tokenCode;
 
